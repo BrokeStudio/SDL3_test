@@ -54,6 +54,23 @@ filter "configurations:Release"
 
 -- Windows
 
+filter { "system:windows", "configurations:Dist" }
+  kind "WindowedApp"
+  defines { "_DIST" }
+  runtime "Release"
+  optimize "On"
+  symbols "Off"
+  targetdir("../Binaries/" .. OutputDir .. "/Demo")
+  entrypoint "mainCRTStartup"
+
+filter "platforms:x86"
+    system "Windows"
+    architecture "x86"
+
+filter "platforms:x86_64"
+    system "Windows"
+    architecture "x86_64"
+
 filter "system:windows"
   -- files { '../Windows/Resources/resources.rc', '**.ico' }
   -- vpaths { ["Resources"] = { "../Windows/Resources/*.rc", "../Windows/Resources/*.ico" } }
@@ -72,33 +89,27 @@ filter "system:windows"
       -- "Imm32.lib",
       "opengl32",
 
-      "SDL3"
+      "SDL3-static"
   }
 
-filter { "system:windows", "configurations:Debug" }
+filter { "system:windows", "configurations:Debug", "platforms:x86" }
   libdirs {
       "../External/SDL3/lib/x86-static-debug"
   }
 
-filter { "system:windows", "configurations:Release" }
+filter { "system:windows", "configurations:Debug", "platforms:x86_64" }
+  libdirs {
+      "../External/SDL3/lib/x64-static-debug"
+  }
+
+filter { "system:windows", "configurations:Release or Dist", "platforms:x86" }
   libdirs {
       "../External/SDL3/lib/x86-static-release"
   }
 
-filter { "system:windows", "configurations:Dist" }
-  kind "WindowedApp"
-  defines { "_DIST" }
-  runtime "Release"
-  optimize "On"
-  symbols "Off"
-  targetdir("../Binaries/" .. OutputDir .. "/Demo")
-  entrypoint "mainCRTStartup"
+filter { "system:windows", "configurations:Release or Dist", "platforms:x86_64" }
   libdirs {
-      "../External/SDL3/lib/x86-static-release"
-  }
-  postbuildcommands {
-    "{DELETE} \"../Binaries/" .. OutputDir .. "/Demo/Demo.exp\"",
-    "{DELETE} \"../Binaries/" .. OutputDir .. "/Demo/Demo.lib\""
+      "../External/SDL3/lib/x64-static-release"
   }
 
 -- Linux

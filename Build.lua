@@ -1,13 +1,11 @@
 -- premake5.lua
 workspace "Demo"
-  -- architecture "x64"
-  configurations { "Debug", "Release", "Dist" }
-  startproject "Explorer"
+  startproject "Demo"
 
   -- Workspace-wide build options for MSVC
   filter "system:windows"
-    architecture "x86"
-    -- architecture "x64"
+    configurations { "Debug", "Release", "Dist" }
+    platforms { "x86", "x86_64" }
     buildoptions { "/EHsc", "/Zc:preprocessor", "/Zc:__cplusplus" }
     linkoptions { "/SAFESEH:NO" } -- Image Has Safe Exception Handers: No
 
