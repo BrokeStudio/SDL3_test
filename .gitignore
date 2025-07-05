@@ -1,0 +1,16 @@
+# Directories
+.vs/
+.vscode/
+Binaries/
+SDL/
+
+# Files
+*.vcxproj
+*.vcxproj.user
+*.vcxproj.filters
+*.sln
+*.log
+Makefile
+
+# Exclude
+!Vendor/Binaries/
