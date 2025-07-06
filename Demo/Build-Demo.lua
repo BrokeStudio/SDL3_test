@@ -115,33 +115,14 @@ filter { "system:windows", "configurations:Release or Dist", "platforms:x86_64" 
 -- Linux
 
 filter "system:linux"
-  -- buildoptions "`sdl3-config --cflags`"
-  -- linkoptions "-lGL -lX11 -lXext -lXrandr -lXrender -lXinerama -lXi -lXcursor `sdl3-config --libs` -static"
-  -- linkoptions { "-static-libsan" }
-  -- -lasound -lpulse
-  libdirs {
-    "../External/SDL3/lib/linux"
-  }
   includedirs {
-    "../External/SDL3/include",
+    -- "../External/SDL3/include",
   }
   links {
-        -- "SDL3", -- Pour libSDL3.a
-        "GL",   -- Pour libGL.so (OpenGL)
-        -- "X11",
-        -- "Xext",
-        -- "Xrandr",
-        -- "Xrender",
-        -- "Xinerama",
-        -- "Xi",
-        -- "Xcursor",
-        -- "asound",
-        -- "pulse",
-        "dl",
-        -- "pthread"
-
-    "pthread",
-    "SDL3" -- ou le chemin vers libSDL3.a si nécessaire
+    -- "GL",
+    -- "dl",
+    -- "pthread",
+    "SDL2"
   }
 
 filter { "system:linux", "configurations:Dist" }
